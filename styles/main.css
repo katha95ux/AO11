@@ -1,137 +1,92 @@
-/* custom property */
+/* ---------- ROOT VARIABLES ---------- */
 :root {
-	--accent-color: #800000;  /* could also be coded #800 */
-	--gradient-color: #f6bb73;
+    --accent-color: #800000;      /* maroon */
+    --gradient-color: #f6bb73;   /* header gradient */
+    --menu-hover: #faebd7;       /* antique white */
 }
 
-/* reset */
+/* ---------- RESET ---------- */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* default styles */
+/* ---------- GLOBAL ---------- */
 body {
-	font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: calc(15px + .2vw);
-	width: min(80%, 1024px);
-	line-height: 1.5;
-	margin: auto;
-	border: 2px solid var(--accent-color);
+    width: min(80%, 1024px);
+    line-height: 1.5;
+    margin: 0 auto;
+    border: 2px solid var(--accent-color);
 }
+
 h1, h2, h3, p, ul {
-	padding: .25em 0;
+    padding: .25em 0;
 }
-a:hover, a:focus{
-	font-style: italic;
-	color: var(--accent-color);
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
 }
-h1 {
-	font-size: 150%;
+
+a:hover,
+a:focus {
+    font-style: italic;
+    color: var(--accent-color);
 }
-h2 {
-	font-size: 130%;
-	color: var(--accent-color);
-}
-h3 {
-	font-size: 105%;
-}
+
 ul {
-	margin-left: 2em;
+    margin-left: 2em;
 }
 
-/* the styles for the header */
+/* ---------- HEADER ---------- */
 header {
-	line-height: 1.2;
-	border-bottom: 2px solid var(--accent-color);
-	background-image: linear-gradient(
-	    30deg, var(--gradient-color) 0%, white 30%, white 65%, var(--gradient-color) 100%);
-	& h2 {
-		font-size: 175%;
-		padding: .5em 0 0 0;
-	}
-	& h3 {
-		font-size: 130%;
-		font-style: italic;
-		padding-bottom: 1em;
-	}
-	& img {
-		width: clamp(40px, 15%, 80px);
-		float: left;
-		margin: .75em 1em;
-	}
+    line-height: 1.2;
+    border-bottom: 2px solid var(--accent-color);
+    background-image: linear-gradient(
+            30deg,
+            var(--gradient-color) 0%,
+            white 30%,
+            white 65%,
+            var(--gradient-color) 100%
+    );
+    padding: .5em 1em 1em;
+    text-align: center;
 }
 
-/* the styles for the main content */
-main {
-	display: flex;
-	clear: left;
-	padding: 0 1em 1em;
-	& blockquote {
-		font-style: italic;
-		padding-left: 1em;
-	}
-	& h3 + img { /* speaker images */
-		width: clamp(40px, 50%, 75px);
-		border: 4px double var(--accent-color);
-		border-radius: 10px;
-	}
+header img {
+    display: none; /* hidden on small screens like book's phone screenshot */
 }
 
-/* the styles for the section */
-section {
-	flex-basis: 75%;
-	padding-left: 1em;
-	& img {
-		width: clamp(100px, 50%, 250px);
-		float: right;
-		margin: 0 1em .25em;
-	}
+header h2 {
+    font-size: 175%;
+    padding-top: .5em;
 }
 
-/* the styles for the aside */
-aside {
-	flex-basis: 25%;
-	padding-right: 1em;
+header h3 {
+    font-size: 130%;
+    font-style: italic;
+    padding-bottom: 1em;
 }
 
-/* the styles for the footer */
-footer {
-	background-color: var(--accent-color);
-	& p {
-		text-align: center;
-		color: white;
-		padding: 1em 0;
-	}
-}
-
-/* CSS class */
-.featured {
-	border-top: 2px solid var(--accent-color);
-	border-bottom: 2px solid var(--accent-color);
-	padding: .5em 0 1em;
-}
-.speaker {
-	& h1 {
-		color: var(--accent-color);
-	}
-	& h2 {
-		color: black;
-	}
-	& p {
-		padding: .5em 0; 
-	}	
-}
-.large {
-	font-size: 125%;
-}
-:root {
-    --accent-color: #800000;
-    --gradient-color: #f6bb73;
-    --menu-light: #fff;           /* light color */
-    --menu-mid: #faebd7;          /* antique white */
-    --menu-dark: #333;            /* dark text on hover */
+/* header at larger widths: logo shown and left aligned */
+@media (min-width: 800px) {
+    header {
+        text-align: left;
+    }
+    header img {
+        display: block;
+        width: clamp(40px, 15%, 80px);
+        float: left;
+        margin: .75em 1em 0 0;
+    }
+    header::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
 }
 
 /* ---------- NAVIGATION ---------- */
@@ -140,22 +95,37 @@ footer {
     border-top: 2px solid var(--accent-color);
 }
 
-.menu {
-    display: flex;
-    justify-content: space-around;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+/* mobile red bar (holds the hamburger) */
+#mobile_menu {
+    display: none;
     background-color: var(--accent-color);
+    border-top: 2px solid var(--accent-color);
+    padding: .4em 1em;
 }
 
-.menu li {
+#mobile_toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+}
+
+/* desktop menu */
+#nav_menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+#nav_menu > li {
     position: relative;
     flex: 1;
     text-align: center;
 }
 
-.menu a {
+#nav_menu a {
     display: block;
     padding: 0.8em;
     text-decoration: none;
@@ -163,29 +133,32 @@ footer {
     font-weight: bold;
 }
 
-.menu a:hover,
-.menu a:focus,
-.menu a.current {
-    background-color: #fff;
+#nav_menu a.current,
+#nav_menu a:hover,
+#nav_menu a:focus {
+    background-color: var(--menu-hover);
     color: var(--accent-color);
 }
 
-/* ---------- DROPDOWN MENU ---------- */
+/* dropdown submenu (desktop only) */
 .submenu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    list-style-type: none;
     background-color: var(--accent-color);
-    padding: 0;
+    list-style-type: none;
+    width: 100%;
     margin: 0;
-    z-index: 1000;
+    padding: 0;
 }
 
-.menu li:hover .submenu {
+#nav_menu li:hover .submenu {
     display: block;
+}
+
+.submenu li {
+    width: 100%;
 }
 
 .submenu a {
@@ -198,4 +171,118 @@ footer {
 .submenu a:hover {
     background-color: white;
     color: var(--accent-color);
+}
+
+/* ---------- MAIN LAYOUT (MOBILE FIRST) ---------- */
+/* section first, then aside on mobile */
+main {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 1em 1em;
+}
+
+/* on phones both are full width; section first */
+section,
+aside {
+    width: 100%;
+}
+
+/* section (Our Mission + Featured Speaker) */
+section h2 {
+    color: var(--accent-color);
+}
+
+section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 0 .75em 0;
+}
+
+/* mobile bottom border under section */
+section {
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* aside (Guest speakers) */
+aside h2,
+aside h3 {
+    color: var(--accent-color);
+}
+
+aside h3 {
+    margin-top: .75em;
+}
+
+aside img {
+    width: clamp(40px, 50%, 75px);
+    border: 4px double var(--accent-color);
+    border-radius: 10px;
+}
+
+/* Featured article box */
+.featured {
+    border-top: 2px solid var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding: .5em 0 1em;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    background-color: var(--accent-color);
+}
+
+footer p {
+    text-align: center;
+    color: white;
+    padding: 1em 0;
+}
+
+/* ---------- TWO-COLUMN LAYOUT ON WIDER SCREENS ---------- */
+@media (min-width: 800px) {
+    main {
+        flex-direction: row;
+    }
+
+    section {
+        flex-basis: 75%;
+        padding-left: 1em;
+        border-bottom: none;
+    }
+
+    section img {
+        width: clamp(100px, 50%, 250px);
+        float: right;
+        margin: 0 1em .25em;
+    }
+
+    aside {
+        flex-basis: 25%;
+        padding-right: 1em;
+    }
+}
+
+/* ---------- NAV RESPONSIVE RULES ---------- */
+@media (max-width: 699px) {
+    #mobile_menu {
+        display: block;
+    }
+    #nav_menu {
+        display: none;
+        flex-direction: column;
+        text-align: left;
+    }
+    #nav_menu > li {
+        flex: none;
+    }
+}
+
+/* Medium & large screens: show full menu, hideS THE mobile bar */
+@media (min-width: 700px) {
+    #mobile_menu {
+        display: none;
+    }
+    #nav_menu {
+        display: flex;
+    }
 }
